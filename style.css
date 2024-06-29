@@ -72,3 +72,24 @@ html{
     background-color: #09af9b;
 }
 
+@media only screen
+and (min-device-width: 300px)
+and (max-device-width: 800px)
+and (-webkit-min-device-pixel-ratio: 2) {
+
+    h1{
+        font-size: 5rem;
+    }
+    h2{
+        font-size: 5rem;
+    }
+    img{
+        width: 30%;
+    }
+    .main{
+        width: 100%;
+    }
+    button{
+        font-size: 3rem;
+    }
+}
