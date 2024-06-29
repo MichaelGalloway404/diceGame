@@ -71,7 +71,7 @@ body {
 html{
     background-color: #09af9b;
 }
-@media  (max-device-width: 600px) {
+@media  (max-device-width: 800px) {
     h1{
         font-size: 5rem;
     }
@@ -88,7 +88,7 @@ html{
         font-size: 3rem;
     }
 }
-@media  (max-width: 600px) {
+@media  (max-width: 800px) {
     h1{
         font-size: 5rem;
     }
