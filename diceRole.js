@@ -65,7 +65,5 @@ function game(){
     if (player1Role === player2Role && player1Role !== 0 && player2Role !== 0){
         document.querySelector('h1').innerHTML = "It's a Tie!";
     }
-    ranBackground("html");
-    ranBackground(".main");
 }
 setInterval(game,1000);
