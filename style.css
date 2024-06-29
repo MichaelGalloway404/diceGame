@@ -71,4 +71,21 @@ body {
 html{
     background-color: #09af9b;
 }
+@media  (max-device-width: 600px) {
+    h1{
+        font-size: 5rem;
+    }
+    h2{
+        font-size: 5rem;
+    }
+    img{
+        width: 30%;
+    }
+    .main{
+        width: 100%;
+    }
+    button{
+        font-size: 3rem;
+    }
+}
 
