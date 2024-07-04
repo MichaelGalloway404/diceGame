@@ -31,12 +31,7 @@ btn2.onclick = function(){
 }
 function roleDice(diceTag){
     let role = Math.floor((Math.random()*6)+1);
-    if(role === 1){document.querySelector(diceTag).setAttribute('src','Dice1.png');}
-    if(role === 2){document.querySelector(diceTag).setAttribute('src','Dice2.png');}
-    if(role === 3){document.querySelector(diceTag).setAttribute('src','Dice3.png');}
-    if(role === 4){document.querySelector(diceTag).setAttribute('src','Dice4.png');}
-    if(role === 5){document.querySelector(diceTag).setAttribute('src','Dice5.png');}
-    if(role === 6){document.querySelector(diceTag).setAttribute('src','Dice6.png');}
+    document.querySelector(diceTag).setAttribute('src','Dice' + role + '.png');
     return role;
 }
 
