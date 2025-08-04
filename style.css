@@ -9,20 +9,13 @@
     align-items: center;
     gap: 100px;
 }
-.container_one{
+.container{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 50vh;
 }
-.container_two{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 50vh;
-}
+
 img{
     display: block;
     border-bottom: solid 10px;
@@ -30,6 +23,10 @@ img{
     border-bottom-right-radius: 10px;
     border-color: black;
     margin: 1px;
+}
+p{
+    background-color: #00B9FF;
+    width: fit-content;
 }
 
 h1{
@@ -74,3 +71,9 @@ body {
 html{
     background-color: #09af9b;
 }
+
+
+/* @media screen and (max-width: 700px) {
+  
+
+} */
