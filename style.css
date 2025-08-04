@@ -46,12 +46,15 @@ h2{
     color: white;
     font-family: "Bodoni MT Black";
     padding: 10px;
+    margin: 20px;
 }
 button{
     border-radius: 20px;
     background-color: #198c07;
     color: white;
     font-family: "Bodoni";
+    width: 100px;
+    height: 100px;
 }
 body {
     display: flex;
