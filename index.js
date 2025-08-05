@@ -261,7 +261,7 @@ function sprite_sheet(img, numFrames, numFramesInRow, sourceX, sourceY, frameWid
     return sSheet;
 }
 
-// create dice sprite sheet
+// create dice sprite sheet for player 1
 const diceImg = new Image();
 diceImg.src = "./images/dice-sheet.png";
 let frameWidth = 50;  // width of a single frame
@@ -270,6 +270,11 @@ let numFrames = 6;    // total number of frames
 let framesInRow = 6;
 let dice_spritesheet = sprite_sheet(diceImg, numFrames, framesInRow, 0, 0, frameWidth, frameHeight, 50, 50);
 let dice_frame = 0;
+// create dice sprite sheet for player 2
+const diceImg2 = new Image();
+diceImg2.src = "./images/dice-sheet2.png";
+let dice_spritesheet2 = sprite_sheet(diceImg2, numFrames, framesInRow, 0, 0, frameWidth, frameHeight, 50, 50);
+let dice_frame2 = 0;
 
 let diceList = [];
 let startPosses = {
@@ -280,7 +285,7 @@ let startPosses = {
 // player 1
 diceList.push(new Dice(6, 5,  map, dice_spritesheet, 1));
 // player 2
-diceList.push(new Dice(6, 10,  map, dice_spritesheet, 2));
+diceList.push(new Dice(6, 10,  map, dice_spritesheet2, 2));
 
 // draws game to the screen
 function update_display() {
