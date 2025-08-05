@@ -15,13 +15,6 @@ let map = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
-
-
-
-let dir = 'd';
-let currentPos = [4, 4];
-let canDraWDie = false;
-
 function ranInt(min,max){
     min = min;
     max = max;
@@ -114,7 +107,6 @@ class Dice {
     }
     // preform a move
     prefMove(){
-        let perfomTimeout;
         if (this.numMoves > 0) {
             // use last move to get random choice of (forward left or right)
             this.currentMove = this.randomMove(this.lastMove); // returns string direction and 0-2 indicating (forward=0,left=1,right=2)
@@ -123,13 +115,12 @@ class Dice {
 
             // stops dice from moving if wall was hit
             if (!moved) {
-                clearTimeout(perfomTimeout); // stop loop if wall hit
+                this.numMoves = 0;
                 // display still needs to be updated
                 update_display();
                 return;
             }
             
-
             // grap possible left and right moves based on previous move
             let possMov = this.diceMoveFlow[this.prevFace][this.currFace];
             // add forward move so we can now randomly chose a (forward left or right) move
@@ -148,7 +139,8 @@ class Dice {
             this.numMoves--;
             update_display();
             
-            perfomTimeout = setTimeout(() => this.prefMove(), 100);
+            // run of we still have moves left
+            setTimeout(() => this.prefMove(), 100);
         }
     }
     // chooses a random move (forward left or right) from last move
@@ -177,9 +169,10 @@ class Dice {
     }
     // attempts to move in direction given, if wall is hit dice doesn't move and returns false
     move(dir) {
+        // board bounderies
         if (dir == 'u' && this.position[0] - 1 >= 0 && this.map[this.position[0] - 1][this.position[1]] != 1) {
             for(let i=0; i < diceList.length; i++){
-                if (
+                if (// hitting other die
                     diceList[i].dieNum !== this.dieNum &&
                     this.position[0] - 1 === diceList[i].position[0] &&
                     this.position[1] === diceList[i].position[1]
@@ -281,13 +274,13 @@ let dice_spritesheet2 = sprite_sheet(diceImg2, numFrames, framesInRow, 0, 0, fra
 let diceList = [];
 let startPosses = {
     1: [6,5],
-    2: [6,6],
+    2: [6,10],
 };
 
 // player 1
 diceList.push(new Dice(6, 5,  map, dice_spritesheet, 1));
 // player 2
-diceList.push(new Dice(6, 6,  map, dice_spritesheet2, 2));
+diceList.push(new Dice(6, 10,  map, dice_spritesheet2, 2));
 
 // draws game to the screen
 function update_display() {
@@ -299,11 +292,6 @@ function update_display() {
     gameBoardCanvas.height = 400;
 
     const gameBoard = gameBoardCanvas.getContext("2d");
-
-    // Optional: Set the CSS size (display size)
-    // gameBoardCanvas.style.width = "1400px";
-    // gameBoardCanvas.style.height = "1400px";
-
     const cellSize = 25;
 
     // draws mini map
@@ -346,7 +334,8 @@ Promise.all([
     update_display();
 });
 
-
+// wait to draw dice but still draw game board
+let canDraWDie = false;
 document.getElementById("diceButton").onclick = function(){
     canDraWDie = true;
     // update_display right after click so we can see first die face
@@ -366,8 +355,7 @@ document.getElementById("diceButton").onclick = function(){
     }
 
     for(let i=0;i<diceList.length;i++){
-        // small delay after click to show first fice of die
-        setTimeout(diceList[i].prefMove(),100);
+        diceList[i].prefMove();
     }
     setInterval(game,200);
 }
