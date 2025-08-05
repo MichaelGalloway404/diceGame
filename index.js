@@ -112,6 +112,7 @@ class Dice {
         }
 
     }
+    // preform a move
     prefMove(){
         let perfomTimeout;
         if (this.numMoves > 0) {
@@ -123,12 +124,15 @@ class Dice {
             // stops dice from moving if wall was hit
             if (!moved) {
                 clearTimeout(perfomTimeout); // stop loop if wall hit
-                // console.log('stopped at wall');
+                // display still needs to be updated
+                update_display();
                 return;
             }
             
 
+            // grap possible left and right moves based on previous move
             let possMov = this.diceMoveFlow[this.prevFace][this.currFace];
+            // add forward move so we can now randomly chose a (forward left or right) move
             if (!possMov.includes(this.diceMoveFlow[this.prevFace].forward)) {
                 possMov.push(this.diceMoveFlow[this.prevFace].forward);
             }
@@ -140,12 +144,11 @@ class Dice {
             // update faces for next move
             this.prevFace = this.currFace;
             this.currFace = newFace;
+
             this.numMoves--;
             update_display();
             
-            // can be turned off if needed
-            // **
-            perfomTimeout = setTimeout(() => this.prefMove(), 100);//** 
+            perfomTimeout = setTimeout(() => this.prefMove(), 100);
         }
     }
     // chooses a random move (forward left or right) from last move
@@ -269,23 +272,22 @@ let frameHeight = 50; // height of a single frame
 let numFrames = 6;    // total number of frames
 let framesInRow = 6;
 let dice_spritesheet = sprite_sheet(diceImg, numFrames, framesInRow, 0, 0, frameWidth, frameHeight, 50, 50);
-let dice_frame = 0;
+let dice_frame = 1;
 // create dice sprite sheet for player 2
 const diceImg2 = new Image();
 diceImg2.src = "./images/dice-sheet2.png";
 let dice_spritesheet2 = sprite_sheet(diceImg2, numFrames, framesInRow, 0, 0, frameWidth, frameHeight, 50, 50);
-let dice_frame2 = 0;
 
 let diceList = [];
 let startPosses = {
     1: [6,5],
-    2: [6,10],
+    2: [6,6],
 };
 
 // player 1
 diceList.push(new Dice(6, 5,  map, dice_spritesheet, 1));
 // player 2
-diceList.push(new Dice(6, 10,  map, dice_spritesheet2, 2));
+diceList.push(new Dice(6, 6,  map, dice_spritesheet2, 2));
 
 // draws game to the screen
 function update_display() {
@@ -337,47 +339,13 @@ function loadImage(src) {
     });
 }
 Promise.all([
-    loadImage("./images/dice-sheet.png")
+    loadImage("./images/dice-sheet.png"),
+    loadImage("./images/dice-sheet2.png")
 ]).then(() => {
-    // console.log("All images loaded");
     // start displaying game when ready
-    document.getElementById("gameBoardCanvas").addEventListener("click", handleCanvasClick);
     update_display();
 });
 
-// drop dice where user clicks on gameboard
-function handleCanvasClick(event) {
-    const canvas = document.getElementById("gameBoardCanvas");
-    const rect = canvas.getBoundingClientRect();
-    
-    // Account for scaling of canvas
-    const scaleX = canvas.width / rect.width;
-    const scaleY = canvas.height / rect.height;
-
-    const x = (event.clientX - rect.left) * scaleX;
-    const y = (event.clientY - rect.top) * scaleY;
-
-    const cellSize = 25;
-    const col = Math.floor(x / cellSize);
-    const row = Math.floor(y / cellSize);
-
-    // Check if the cell is in bounds
-    if (row >= 0 && row < map.length && col >= 0 && col < map[0].length) {
-        for(let i=0;i<diceList.length;i++){
-            if(row == diceList[i].position[0] && col == diceList[i].position[1]){
-                // console.log("clicked die = " + diceList[i].dieNum);
-                let diceFaceNum = diceList[i].dice_frame+1;
-                // console.log("die " + diceList[i].dieNum + " face = " + diceFaceNum);
-                scoreBoard.push(diceFaceNum);
-                console.log("Scored die = " + scoreBoard);
-                // scoreCalc(scoreBoard);
-                diceList.splice(i, 1);  // Remove the die at index i
-                break;
-            }
-        }
-        update_display();
-    }
-}
 
 document.getElementById("diceButton").onclick = function(){
     canDraWDie = true;
@@ -440,3 +408,6 @@ function ranBackground(query){
     let b = Math.floor((Math.random()*255)+1);
     document.querySelector(query).style.backgroundColor = 'rgb(' + [r,g,b].join(',') + ')';
 }
+
+// display board 
+update_display();
