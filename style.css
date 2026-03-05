@@ -16,22 +16,22 @@ html, body {
 
 /* Main container */
 .main {
-    background-color: #85c591dd;
+    background-color: #85c5be8a;
     border-radius: 20px;
     padding: 40px 20px;
     width: 600px;
     max-width: 600px;
     text-align: center;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    border-top: 6px solid #198c07;
-    border-bottom: 6px solid #198c07;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.801);
+    border-top: 6px solid #076d8c;
+    border-bottom: 6px solid #076d8c;
 }
 
 /* Heading */
 .h1_container h1 {
     font-family: 'Bodoni MT Black', serif;
     font-size: 2rem;
-    color: #198c07;
+    color: #076b8c;
     margin-bottom: 30px;
     text-shadow: 2px 2px 5px #00b9ff66;
 }
@@ -44,8 +44,8 @@ html, body {
 }
 
 .scores h2 {
-    background: #198c07;
-    color: white;
+    background: #07698c;
+    color: rgb(251, 216, 243);
     padding: 10px 20px;
     border-radius: 15px;
     font-family: 'Bodoni MT Black', serif;
@@ -60,7 +60,7 @@ html, body {
 .instructions {
     margin: 15px 0;
     font-weight: bold;
-    color: #0097c1;
+    color: #1f3a42;
     font-size: 1.1rem;
     animation: bounce 2s infinite;
 }
