@@ -12,6 +12,7 @@ let map = [
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ]
 
@@ -284,17 +285,17 @@ diceList.push(new Dice(6, 10,  map, dice_spritesheet2, 2));
 
 // draws game to the screen
 function update_display() {
-    // for display mini map
+    // for display map
     const gameBoardCanvas = document.getElementById("gameBoardCanvas");
 
     // Set internal canvas size
-    gameBoardCanvas.width = 400;
-    gameBoardCanvas.height = 400;
+    gameBoardCanvas.width = 375; // each grid cell is 25px times 15 cells
+    gameBoardCanvas.height = 375;
 
     const gameBoard = gameBoardCanvas.getContext("2d");
     const cellSize = 25;
 
-    // draws mini map
+    // draws map
     for (let i = 0; i < map.length; i++) {
         for (let j = 0; j < map[i].length; j++) {
             if (map[i][j] === 1) {
@@ -310,7 +311,7 @@ function update_display() {
                 }
             }
 
-            // // Draw grid lines
+            // // Draw grid lines for fun or debug
             // gameBoard.strokeStyle = "gray";
             // gameBoard.strokeRect(j * cellSize, i * cellSize, cellSize, cellSize);
         }
@@ -342,12 +343,12 @@ document.getElementById("diceButton").onclick = function(){
     update_display();
 
     // randomly change background colors
-    ranBackground("body");
-    ranBackground(".main");
-    ranBackground("html");
-    ranBackground("h1");
-    ranBackground("h2.p1");
-    ranBackground("h2.p2");
+    // ranBackground("body");
+    // ranBackground(".main");
+    // ranBackground("html");
+    // ranBackground("h1");
+    // ranBackground("h2.p1");
+    // ranBackground("h2.p2");
 
     for(let i=0;i<diceList.length;i++){
         diceList[i].position = [startPosses[diceList[i].dieNum][0],startPosses[diceList[i].dieNum][1]];
@@ -383,19 +384,19 @@ function game(){
 }
 
 
-// two fuctions for changing either an objects border or background color randomly
-function ranBorderBack(query){
-    let r = Math.floor((Math.random()*255)+1);
-    let g = Math.floor((Math.random()*255)+1);
-    let b = Math.floor((Math.random()*255)+1);
-    document.querySelector(query).style.borderBlockColor = 'rgb(' + [r,g,b].join(',') + ')';
-}
-function ranBackground(query){
-    let r = Math.floor((Math.random()*255)+1);
-    let g = Math.floor((Math.random()*255)+1);
-    let b = Math.floor((Math.random()*255)+1);
-    document.querySelector(query).style.backgroundColor = 'rgb(' + [r,g,b].join(',') + ')';
-}
+// two fuctions for changing either an objects border or background color randomly // ugly taken out for now
+// function ranBorderBack(query){
+//     let r = Math.floor((Math.random()*255)+1);
+//     let g = Math.floor((Math.random()*255)+1);
+//     let b = Math.floor((Math.random()*255)+1);
+//     document.querySelector(query).style.borderBlockColor = 'rgb(' + [r,g,b].join(',') + ')';
+// }
+// function ranBackground(query){
+//     let r = Math.floor((Math.random()*255)+1);
+//     let g = Math.floor((Math.random()*255)+1);
+//     let b = Math.floor((Math.random()*255)+1);
+//     document.querySelector(query).style.backgroundColor = 'rgb(' + [r,g,b].join(',') + ')';
+// }
 
 // display board 
 update_display();
